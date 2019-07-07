@@ -1,0 +1,66 @@
+{% load bootstrap4 %}
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css?family=Righteous" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container-fluid" id="nav">
+        <div class="topnav" id="nav">
+            <div class="row">
+                <div class="col-md-4" id="logo">
+                    <a href="{% url 'home_page' %}" style="color:white;"><strong>Neighborhood Watch.</strong></a>
+                </div>
+                <div class="col-md-2" height="5px;" width="10px;">
+                    <form class="navbar-form" role="search" action="">
+                        <input type="text" name="search" placeholder="Search.." id="input">
+                    </form>
+
+                </div>
+
+                <div class="col-md-2" id="drop">
+                    {% if user.is_authenticated %}
+                    <ul class="" style="position:absolute;">
+                        <li class="dropdown btn profile-settings-btn" style="list-style:none;" aria-label="profile settings">
+                            <a href="#" class="dropdown-toggle btn btn-default" data-toggle="dropdown" role="button"
+                                aria-expanded="false" style="color:white;"><i class="fa fa-cog" aria-hidden="true"></i>
+                            </a>
+                            <ul class="dropdown-menu" role="menu" style="position: absolute;left: 0px;
+                            top: 0px;
+                            z-index: 1;">
+                                <li>
+                                    <a href="{% url 'home_page' %}">Home</a>
+                                </li>
+                                <li>
+                                    <a href="{% url 'edit_profile' %}">Edit Profile</a>
+                                </li>
+                                <li>
+                                    <a href="/accounts/password/change">Change Password</a>
+                                </li>
+                                <li>
+                                    <a href="/logout">Logout</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+
+                    {% else %}
+                    <li style="list-style: none;">
+                        <a href="/accounts/register/" style="color:white; font-size: 13px;">REGISTER /</a>
+                        <a class='btn btn-default' href="/accounts/login" style="color:white; font-size: 13px;">LOGIN</a>
+                    </li>
+
+                    {% endif %}
+                    {% if data.profile.Profile_photo %}
+                    <img src="{{profile.profile.Profile_photo.url}}" alt="img" width="50px" height="50px ">
+                    <h1 class="profile-user-name" style="font-size: 14px;">{{profile.username}}</h1>
+                    {% endif %}
+                </div>
+                <div class="col-md-2" style="text-align: center; padding-top: 16px; font-size: 13px; color:white;background-color:rgba(0,0,0,0.9); opacity: 0.9;">
+                    <a href="{% url 'add_hood'%}" style="color: white;">ADD NEW HOOD!</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
