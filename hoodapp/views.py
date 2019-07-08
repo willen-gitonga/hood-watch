@@ -29,7 +29,7 @@ def edit(request):
 
 @login_required(login_url='/accounts/login')
 def upload_business(request,neighborhood_id):
-    business = Business.objects.filter(neighborhood_id=neighborhood_id)
+    business=Business.objects.get(id = neighborhood_id)
     neighborhood = NeighborHood.objects.get(pk=neighborhood_id)
     profile = User.objects.get(username=request.user)
     if request.method == 'POST':
@@ -75,7 +75,7 @@ def leave(request):
 
 @login_required(login_url='/accounts/login/')
 def hood(request,neighborhood_id):
-    business=Business.objects.filter(neighborhood_id=neighborhood_id)
+    business=Business.objects.get(id=neighborhood_id)
     single_hood = NeighborHood.objects.get(pk=neighborhood_id)
     profile = User.objects.get(username=request.user)
   
