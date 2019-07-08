@@ -21,7 +21,7 @@ class HoodForm(forms.ModelForm):
 class PostForm(forms.ModelForm):
     class Meta:
         model = Post
-        exclude = ['user','neighborHood','pub_date']
+        exclude = ['user','neighborhood','pub_date']
 
 class CommentForm(forms.ModelForm):
     class Meta:

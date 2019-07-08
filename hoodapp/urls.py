@@ -4,12 +4,12 @@ from django.conf.urls.static import static
 from django.conf import settings
 
 urlpatterns=[
-    url(r'^$',views.home_page,name = 'home_page'),
-    url(r'^edit/$', views.edit, name='edit_profile'),
-    url(r'^upload/(\d+)', views.upload_business, name='upload_business'),
-    url(r'^hood', views.add_hood, name='add_hood'),
+    url('^$',views.home_page,name = 'home_page'),
+    url(r'^edit$', views.edit, name='edit_profile'),
+    url(r'^upload/$', views.upload_business, name='upload_business'),
+    url(r'^hood/$', views.add_hood, name='add_hood'),
     url(r'^join(?P<neighborhood_id>\d+)',views.join, name='join'),
-    url(r'^leave/',views.leave, name='leave'),
+    url(r'^leave/(?P<neighborhood_id>\d+)',views.leave, name='leave'),
     url(r'^one_hood(?P<neighborhood_id>\d+)',views.hood, name='hood'),
     url(r'^comment/(?P<post_id>\d+)', views.one_post, name='comment'),
     url(r'^post/$', views.add_post,name='add_post'),

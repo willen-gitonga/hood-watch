@@ -1,6 +1,20 @@
 from django.db import models
 from django.contrib.auth.models import User
 import datetime as dt
+from django.db.models.signals import post_save
+from django.dispatch import receiver
+
+# Create your models here.
+@receiver(post_save, sender=User)
+def create_user_profile(sender, instance, created, **kwargs):
+    if created:
+        Profile.objects.create(user=instance)
+
+
+@receiver(post_save, sender=User)
+def save_user_profile(sender, instance, **kwargs):
+    instance.profile.save()
+
 class Profile(models.Model):
     Profile_photo = models.ImageField(upload_to = 'images/',blank=True)
     Bio = models.TextField(max_length = 50,null = True)
@@ -34,6 +48,9 @@ class NeighborHood(models.Model):
     pub_date = models.DateTimeField(auto_now_add=True, null=True)
     occupants = models.ForeignKey(User, null = True,related_name='business')
     
+    def __str__(self):
+        return self.name
+
     def save_hood(self):
         self.save()
 
@@ -48,7 +65,7 @@ class Business(models.Model):
     image = models.ImageField(upload_to = 'images/')
     user = models.ForeignKey(User, null = True,related_name='user')
     pub_date = models.DateTimeField(auto_now_add=True, null=True)
-    neighborhood = models.ForeignKey(NeighborHood, null = True,related_name='business')
+    neighborHood = models.ForeignKey(NeighborHood, null = True,related_name='business')
     class Meta:
         ordering = ['-pk']
 
